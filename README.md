@@ -173,8 +173,17 @@ This section provides sample inputs used to demonstrate the execution of both al
 **Sample Input:**
 
 ```text
-Define the matrix according to the input format
-used by the matching implementation.
+Enter number of workers: ...
+Enter number of tasks: ...
+
+Enter the cost matrix.
+Input 4 numbers for each of the 4 rows.
+Separate values using spaces.
+
+Worker 1: ...
+Worker 2: ...
+Worker 3: ...
+Worker 4: ...
 ```
 
 **Expected Result:**
@@ -220,14 +229,36 @@ Sudoku solved successfully!
 ```text
 Matching results:
 
-Assignment 1: ...
-Assignment 2: ...
-Maximum Matching: ...
+Worker 1: 90 75 75 80
+Worker 2: 35 85 55 60
+Worker 3: 125 95 90 105
+Worker 4: 45 110 95 115
+
+=============================================
+             COST MATRIX
+=============================================
+    90     75     75     80
+    35     85     55     60
+   125     95     90    105
+    45    110     95    115
+
+=============================================
+          OPTIMAL ASSIGNMENT
+=============================================
+Worker 1 -> Task 2 | Cost: 75
+Worker 2 -> Task 4 | Cost: 60
+Worker 3 -> Task 3 | Cost: 90
+Worker 4 -> Task 1 | Cost: 45
+---------------------------------------------
+Total Minimum Cost: 270
+Total Assignments: 4
+=============================================
 ```
 
 **Execution Screenshot:**
 
-Add your execution screenshot here.
+<img width="422" height="690" alt="image" src="https://github.com/user-attachments/assets/7e660d12-9b0b-4e1f-9559-90cb30c8d2d8" />
+
 
 ---
 
