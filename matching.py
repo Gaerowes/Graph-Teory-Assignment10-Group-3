@@ -1,45 +1,20 @@
 
 def hungarian_algorithm(cost_matrix):
-    """
-    Hungarian Algorithm for minimum-cost assignment.
-    Supports rectangular matrices by padding them
-    into square matrices.
-    """
-
     rows = len(cost_matrix)
-
-    if rows == 0:
-        raise ValueError("Matrix cannot be empty.")
-
     cols = len(cost_matrix[0])
 
-    if cols == 0:
-        raise ValueError("Matrix cannot have empty rows.")
-
-    if any(len(row) != cols for row in cost_matrix):
-        raise ValueError("All rows must have the same length.")
-
-    if any(not isinstance(value, (int, float)) or isinstance(value, bool)
-           for row in cost_matrix for value in row):
-        raise ValueError("Matrix must contain numeric costs.")
-
-    if any(value < 0 for row in cost_matrix for value in row):
-        raise ValueError("Costs must be non-negative.")
-
-    # Pad rectangular matrix to square matrix
+    # Convert rectangular matrix into square matrix
     size = max(rows, cols)
     max_cost = max(max(row) for row in cost_matrix)
     padding_cost = (max_cost + 1) * (size + 1)
 
-    cost = [
-        [padding_cost] * size for _ in range(size)
-    ]
+    cost = [[padding_cost] * size for _ in range(size)]
 
     for i in range(rows):
         for j in range(cols):
             cost[i][j] = cost_matrix[i][j]
 
-    # Hungarian Algorithm (minimum cost)
+    # Hungarian Algorithm
     u = [0] * (size + 1)
     v = [0] * (size + 1)
     p = [0] * (size + 1)
@@ -59,7 +34,7 @@ def hungarian_algorithm(cost_matrix):
 
             for j in range(1, size + 1):
                 if not used[j]:
-                    current = cost[i0 - 1][j - 1] - u[i0] - v[j]
+                    current = cost[i0-1][j-1] - u[i0] - v[j]
 
                     if current < minv[j]:
                         minv[j] = current
@@ -89,14 +64,15 @@ def hungarian_algorithm(cost_matrix):
             if j0 == 0:
                 break
 
-    # Extract assignments, excluding dummy rows/columns
     assignments = []
 
     for j in range(1, size + 1):
         i = p[j]
 
         if 1 <= i <= rows and j <= cols:
-            assignments.append((i, j, cost_matrix[i - 1][j - 1]))
+            assignments.append(
+                (i, j, cost_matrix[i-1][j-1])
+            )
 
     assignments.sort(key=lambda x: x[0])
 
@@ -105,63 +81,90 @@ def hungarian_algorithm(cost_matrix):
     return assignments, total_cost
 
 
-def display_result(matrix, case_number):
-    print(f"\nTEST CASE {case_number}")
-    print("=" * 40)
+def get_matrix_input():
+    print("=" * 45)
+    print("       DYNAMIC MATRIX MATCHING")
+    print("          HUNGARIAN ALGORITHM")
+    print("=" * 45)
 
-    print("Cost Matrix:")
+    while True:
+        try:
+            rows = int(input("\nEnter number of workers: "))
+            cols = int(input("Enter number of tasks: "))
 
-    for row in matrix:
-        print(row)
+            if rows <= 0 or cols <= 0:
+                print("Both dimensions must be positive.")
+                continue
 
+            break
+
+        except ValueError:
+            print("Please enter valid integers.")
+
+    matrix = []
+
+    print("\nEnter the cost matrix.")
+    print(f"Input {cols} numbers for each of the {rows} rows.")
+    print("Separate values using spaces.\n")
+
+    for i in range(rows):
+        while True:
+            try:
+                values = list(map(int, input(f"Worker {i+1}: ").split()))
+
+                if len(values) != cols:
+                    print(f"Please enter exactly {cols} values.")
+                    continue
+
+                if any(value < 0 for value in values):
+                    print("Costs cannot be negative.")
+                    continue
+
+                matrix.append(values)
+                break
+
+            except ValueError:
+                print("Please enter integers only.")
+
+    return matrix
+
+
+def display_result(matrix):
     assignments, total_cost = hungarian_algorithm(matrix)
 
-    print("\nOptimal Assignments:")
+    print("\n" + "=" * 45)
+    print("             COST MATRIX")
+    print("=" * 45)
+
+    for row in matrix:
+        print(" ".join(f"{value:6}" for value in row))
+
+    print("\n" + "=" * 45)
+    print("          OPTIMAL ASSIGNMENT")
+    print("=" * 45)
 
     for worker, task, cost in assignments:
-        print(f"Worker {worker} -> Task {task} | Cost: {cost}")
+        print(
+            f"Worker {worker} -> Task {task} "
+            f"| Cost: {cost}"
+        )
 
-    print(f"\nTotal Minimum Cost: {total_cost}")
-
-    print(f"Number of Assignments: {len(assignments)}")
+    print("-" * 45)
+    print(f"Total Minimum Cost: {total_cost}")
+    print(f"Total Assignments: {len(assignments)}")
+    print("=" * 45)
 
 
 def main():
-    test_cases = [
-        # Test Case 1: 3 x 3
-        [
-            [10, 20, 30],
-            [20, 10, 15],
-            [15, 25, 10]
-        ],
+    while True:
+        matrix = get_matrix_input()
+        display_result(matrix)
 
-        # Test Case 2: 4 x 4
-        [
-            [90, 75, 75, 80],
-            [35, 85, 55, 65],
-            [125, 95, 90, 105],
-            [45, 110, 95, 115]
-        ],
+        again = input("\nRun another test case? (y/n): ").lower()
 
-        # Test Case 3: 3 x 4
-        [
-            [8, 6, 10, 9],
-            [9, 12, 7, 11],
-            [14, 9, 16, 5]
-        ],
-
-        # Test Case 4: 5 x 3
-        [
-            [12, 7, 9],
-            [8, 11, 6],
-            [10, 5, 13],
-            [9, 8, 7],
-            [6, 10, 11]
-        ]
-    ]
-
-    for i, matrix in enumerate(test_cases, start=1):
-        display_result(matrix, i)
+        if again != "y":
+            print("\nProgram terminated.")
+            break
 
 
 if __name__ == "__main__":
