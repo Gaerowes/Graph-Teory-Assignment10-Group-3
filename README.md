@@ -6,7 +6,7 @@ Implementation of Graph Coloring and Graph Matching Algorithms for the Graph The
 
 ## 1. Identity
 
-**Informatics ITS Graph Theory Class — Group 3**
+**Informatics ITS Graph Theory Class - Group 3**
 
 | Name | Student ID |
 |---|---|
@@ -21,7 +21,7 @@ Implementation of Graph Coloring and Graph Matching Algorithms for the Graph The
 
 This project implements two applications of graph theory: Graph Coloring and Graph Matching.
 
-### 2.1 Graph Coloring — Sudoku Solver
+### 2.1 Graph Coloring - Sudoku Solver
 
 Graph Coloring is the problem of assigning colors to the vertices of a graph so that no two adjacent vertices have the same color.
 
@@ -40,7 +40,7 @@ The algorithm works by assigning a valid number to an empty cell and checking wh
 
 The process continues until all cells are successfully filled or no valid solution can be found.
 
-### 2.2 Graph Matching — Dynamic Matrix Matching
+### 2.2 Graph Matching - Dynamic Matrix Matching
 
 Graph Matching is a problem of finding a set of edges in a graph where no two selected edges share the same vertex.
 
@@ -199,7 +199,7 @@ and the resulting matching value.
 
 This section presents the execution results of the implemented algorithms.
 
-### 6.1 Graph Coloring — Sudoku Solver
+### 6.1 Graph Coloring - Sudoku Solver
 
 **Sample Output:**
 
@@ -222,7 +222,7 @@ Sudoku solved successfully!
 <img width="559" height="403" alt="image" src="https://github.com/user-attachments/assets/cbf64568-51be-45af-a3fa-3f21ea99ebb5" />
 
 
-### 6.2 Graph Matching — Dynamic Matrix Matching
+### 6.2 Graph Matching - Dynamic Matrix Matching
 
 **Sample Output:**
 
