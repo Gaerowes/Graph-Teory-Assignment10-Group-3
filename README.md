@@ -173,17 +173,17 @@ This section provides sample inputs used to demonstrate the execution of both al
 **Sample Input:**
 
 ```text
-Enter number of workers: ...
-Enter number of tasks: ...
+Enter number of workers: 4
+Enter number of tasks: 4
 
 Enter the cost matrix.
 Input 4 numbers for each of the 4 rows.
 Separate values using spaces.
 
-Worker 1: ...
-Worker 2: ...
-Worker 3: ...
-Worker 4: ...
+Worker 1: 90 75 75 80
+Worker 2: 35 85 55 60
+Worker 3: 125 95 90 105
+Worker 4: 45 110 95 115
 ```
 
 **Expected Result:**
