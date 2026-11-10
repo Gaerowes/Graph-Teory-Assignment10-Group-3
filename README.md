@@ -210,7 +210,8 @@ Sudoku solved successfully!
 
 **Execution Screenshot:**
 
-Add your execution screenshot here.
+<img width="559" height="403" alt="image" src="https://github.com/user-attachments/assets/cbf64568-51be-45af-a3fa-3f21ea99ebb5" />
+
 
 ### 6.2 Graph Matching — Dynamic Matrix Matching
 
